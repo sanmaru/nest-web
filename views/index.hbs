@@ -1,5 +1,5 @@
-<h1>Example App: Home</h1>
-<div class="row">
+<h1>Example App: Home <button id='btnPrint' type="button" class="btn btn-primary" >Print</button></h1>
+<div class="row" id="sub">
   <div class="col-5">
     When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
     \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
@@ -9,11 +9,21 @@
     \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
   </div>
 </div>
-
-
 <script> 
   //console.log(marked.parse('# Marked in the browser\n\nRendered by **marked**.'));
   {{!-- document.getElementById('markdown-math').innerHTML =  katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, {
     throwOnError: false
   }); --}}
+  document.getElementById('btnPrint').addEventListener('click', function(){
+    console.log(1);
+    const intitBody = document.body.innerHTML;
+    window.onbeforeprint = function() {
+      document.body.innerHTML = document.getElementById("sub").innerHTML;
+    }
+    window.onafterprint = function() {
+      document.body.innerHTML = intitBody;
+    }
+    window.print();
+    console.log(2);
+  });
 </script>
